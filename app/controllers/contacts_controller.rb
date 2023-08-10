@@ -14,7 +14,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1
   def show
-    render json: @contact
+    render json: @contact.to_pt
   end
 
   # POST /contacts

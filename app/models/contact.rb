@@ -11,4 +11,12 @@ class Contact < ApplicationRecord
       include: { kind: { only: :description } }
     )
   end
+
+  def to_pt
+    {
+      name: self.name,
+      email: self.email,
+      birthdate: (I18n.l(self.birthdate) unless self.birthdate.blank?)
+    }
+  end
 end
