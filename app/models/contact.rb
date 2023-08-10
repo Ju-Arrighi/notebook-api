@@ -4,7 +4,11 @@ class Contact < ApplicationRecord
     'Juliana Arrighi'
   end
 
-  # def as_json(options = {})
-  #   super methods: :author, root: true
-  # end
+  def as_json(options = {})
+    super(
+      methods: :author,
+      root: true,
+      include: { kind: { only: :description } }
+    )
+  end
 end
