@@ -20,8 +20,18 @@ namespace :dev do
         birthdate: Faker::Date.between(from: 50.years.ago, to: 18.years.ago),
         kind: Kind.all.sample
       )
-      end
-      puts 'Contacts created successfuly'
     end
-
+    puts 'Contacts created successfuly'
+    #################################
+    puts 'Creating phones'
+    Contact.all.each do |contact|
+      Random.rand(5).times do
+        phone = contact.phones.create!(number: Faker::PhoneNumber.cell_phone)
+        contact.phones << phone
+        contact.save!
+        # binding.break
+      end
+    end
+    puts 'Phones created successfuly'
   end
+end
