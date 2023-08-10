@@ -1,9 +1,10 @@
 class Contact < ApplicationRecord
+  belongs_to :kind
   def author
     'Juliana Arrighi'
   end
 
-  def as_json(options = {})
-    super methods: :author, root: true
-  end
+  # def as_json(options = {})
+  #   super methods: :author, root: true
+  # end
 end
