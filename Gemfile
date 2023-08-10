@@ -42,6 +42,8 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   # Faker helps you generate realistic test data, and populate your database
   gem 'faker'
+  # Pry is a runtime developer console and IRB alternative with powerful introspection capabilities
+  gem 'pry', '~> 0.14.2'
 end
 
 group :development do
