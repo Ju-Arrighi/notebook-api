@@ -1,6 +1,7 @@
 class Contact < ApplicationRecord
   belongs_to :kind, optional: true
   has_many :phones
+  accepts_nested_attributes_for :phones, allow_destroy: true
 
   def author
     'Juliana Arrighi'
@@ -10,7 +11,8 @@ class Contact < ApplicationRecord
     super(
       methods: :author,
       root: true,
-      include: { kind: { only: :description } }
+      include: { kind: { only: :description } },
+      include: :phones
     )
   end
 
