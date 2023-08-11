@@ -33,5 +33,16 @@ namespace :dev do
       end
     end
     puts 'Phones created successfuly'
+    #################################
+    puts 'Creating address...'
+    Contact.all.each do |contact|
+      Address.create!(
+        street: Faker::Address.street_address,
+        city: Faker::Address.city,
+        contact: contact
+      )
+      # binding.break
+    end
+    puts 'Address created successfuly'
   end
 end
