@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
   def index
     @contacts = Contact.all
 
-    render json: @contacts
+    render json: @contacts,  include: [:phones, :kind, :address]
     # render json: @contacts, root: true
     # render json: @contacts, only: [:name, :email]
     # render json: @contacts.map { |contact| contact.attributes.merge(author: "Juliana") }
@@ -14,7 +14,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts/1
   def show
-    render json: @contact, include: :phones
+    render json: @contact, include: [:phones, :kind, :address]
   end
 
   # POST /contacts
@@ -22,7 +22,7 @@ class ContactsController < ApplicationController
     @contact = Contact.new(contact_params)
 
     if @contact.save
-      render json: @contact, status: :created, include: :phones, location: @contact
+      render json: @contact, status: :created, include: [:kind, :phones, :address], location: @contact
     else
       render json: @contact.errors, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   def update
     if @contact.update(contact_params)
-      render json: @contact
+      render json: @contact, include: [:kind, :phones, :address]
     else
       render json: @contact.errors, status: :unprocessable_entity
     end
@@ -43,13 +43,17 @@ class ContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def contact_params
-      params.require(:contact).permit(:name, :email, :birthdate, :kind_id, phones_attributes: [:number, :id, :_destroy])
-    end
+  # Only allow a list of trusted parameters through.
+  def contact_params
+    params.require(:contact).permit(
+      :name, :email, :birthdate, :kind_id,
+      phones_attributes: [:number, :id, :_destroy],
+      address_attributes: [:street, :city, :id]
+    )
+  end
 end
