@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
   def index
     @contacts = Contact.all
 
-    render json: @contacts,  include: [:phones, :kind, :address]
+    render json: @contacts, include: [:phones, :kind, :address]
     # render json: @contacts, root: true
     # render json: @contacts, only: [:name, :email]
     # render json: @contacts.map { |contact| contact.attributes.merge(author: "Juliana") }
