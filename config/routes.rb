@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
    resources :contacts do
     resource :address, only: [:show]
-    resource :address, only: [:show], path: 'relationships/address'
+    resource :address, only: [:show], path: 'relationships/addresses'
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

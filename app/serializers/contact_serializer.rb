@@ -14,7 +14,7 @@ class ContactSerializer < ActiveModel::Serializer
   end
 
   has_one :address do
-    link(:related) { contact_address_path(object.id) }
+    link(:related) { contact_address_url(object.id) }
   end
   link(:self) { contact_path(object.id) }
   link(:kind) { kind_url(object.kind.id) }
