@@ -19,7 +19,7 @@ Rails.application.configure do
 
   # Set up default as localhost:3000
   Rails.application.routes.default_url_options = {
-    host: 'localhoast',
+    host: 'localhost',
     port: 3000
   }
   # Enable/disable caching. By default caching is disabled.

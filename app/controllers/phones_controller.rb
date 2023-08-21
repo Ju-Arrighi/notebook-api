@@ -1,14 +1,14 @@
 class PhonesController < ApplicationController
-  before_action :set_phones, only: %i[ show ]
+  before_action :set_contacts, only: %i[ show ]
 
-  # GET /phone/1
+  # GET/contacts/:contact_id/phones
   def show
     render json: @phones #include: [:phones, :kind, :address]
   end
 
   private
 
-  def set_phones
+  def set_contacts
     if params[:contact_id]
     @phones = Contact.find(params[:contact_id]).phones
     # binding.break

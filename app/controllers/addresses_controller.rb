@@ -26,6 +26,11 @@ class AddressesController < ApplicationController
     end
   end
 
+  # DELETE/contacts/:contact_id/address(
+  def destroy
+    @contact.address.destroy
+  end
+
   private
 
   def set_contact
