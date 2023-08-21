@@ -1,22 +1,54 @@
 class PhonesController < ApplicationController
-  before_action :set_contacts, only: %i[ show ]
+  before_action :set_contact, only: %i[ show update destroy]
 
   # GET/contacts/:contact_id/phones
   def show
     render json: @phones #include: [:phones, :kind, :address]
   end
 
-  private
-
-  def set_contacts
-    if params[:contact_id]
-    @phones = Contact.find(params[:contact_id]).phones
-    # binding.break
-    return @phones
+  # PUT/contacts/:contact_id/phone
+  def create
+    @contact.phones << Phone.new(phone_params)
+    if @contact.save
+      render json: @contact.phones, status: :created, location: contact_phones_url(@contact)
+    else
+      render json: @contact.phones.errors
     end
-    @phones = phones.where(id: params[:id])
   end
 
+    # PATCH/contacts/:contact_id/phone
+  def update
+    phone = Phone.find(phone_params[:id])
+    if phone.update(phone_params)
+      render json: @contact.phones
+    else
+      render json: @contact.phones.errors
+    end
+  end
+
+  # DELETE/contacts/:contact_id/phone
+  def destroy
+    phone = Phone.find(phone_params[:id])
+    phone.destroy
+  end
+
+  private
+
+  # def set_contacts
+  #   if params[:contact_id]
+  #   @phones = Contact.find(params[:contact_id]).phones
+  #   return @phones
+  #   end
+  #   @phones = phones.where(id: params[:id])
+  # end
+
+  def set_contact
+    @contact = Contact.find(params[:contact_id])
+  end
+
+  def phone_params
+    ActiveModelSerializers::Deserialization.jsonapi_parse(params)
+  end
   # def phones_params
   #   params.require(:phone).permit(:number)
   # end

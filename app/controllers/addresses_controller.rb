@@ -14,7 +14,6 @@ class AddressesController < ApplicationController
     else
       render json: @contact.address.errors
     end
-
   end
 
   # PATCH/contacts/:contact_id/address
@@ -35,7 +34,6 @@ class AddressesController < ApplicationController
 
   def set_contact
     @contact = Contact.find(params[:contact_id])
-    #  binding.break
   end
 
   def address_params

@@ -5,14 +5,11 @@ Rails.application.routes.draw do
   resources :contacts do
     resource :kind, only: [:show]
     resource :kind, only: [:show], path: 'relationships/kind'
-  end
 
-  resources :contacts do
     resource :phones, only: [:show]
     resource :phones, only: [:show], path: 'relationships/phones'
-  end
+    resource :phone, only: [:create, :update, :destroy]
 
-   resources :contacts do
     resource :address, only: [:show, :create, :update, :destroy]
     resource :address, only: [:show, :create, :update, :destroy], path: 'relationships/addresses'
   end
