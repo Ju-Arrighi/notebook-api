@@ -1,4 +1,7 @@
 class KindsController < ApplicationController
+  # include ActionController::HttpAuthentication::Basic::ControllerMethods
+  # http_basic_authenticate_with name: 'juliana', password: 'secret', except: [:index]
+
   before_action :set_kind, only: %i[ show update destroy ]
 
   # GET /kinds
@@ -44,7 +47,7 @@ class KindsController < ApplicationController
     if params[:contact_id]
       kind_id = Contact.find(params[:contact_id]).kind_id
     else
-      kind_id = Kind.find(params[:id])
+      kind_id = Kind.find(params[:id]).id
     end
     @kind = Kind.find(kind_id)
   end
