@@ -1,8 +1,11 @@
 class KindsController < ApplicationController
   # include ActionController::HttpAuthentication::Basic::ControllerMethods
   # http_basic_authenticate_with name: 'juliana', password: 'secret', except: [:index]
-
+  TOKEN = 'secret123'
   before_action :set_kind, only: %i[ show update destroy ]
+  before_action :authenticate
+
+  include ActionController::HttpAuthentication::Token::ControllerMethods
 
   # GET /kinds
   def index
@@ -55,5 +58,15 @@ class KindsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def kind_params
     params.require(:kind).permit(:description)
+  end
+
+  def authenticate
+    authenticate_or_request_with_http_token do |token, options|
+      # Compare tokens in a time constant manner to avoid timing attack
+      ActiveSupport::SecurityUtils.secure_compare(
+        ::Digest::SHA256.hexdigest(token),
+        ::Digest::SHA256.hexdigest(TOKEN)
+      )
+    end
   end
 end
