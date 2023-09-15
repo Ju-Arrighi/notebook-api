@@ -1,11 +1,10 @@
 class KindsController < ApplicationController
   # include ActionController::HttpAuthentication::Basic::ControllerMethods
   # http_basic_authenticate_with name: 'juliana', password: 'secret', except: [:index]
-  TOKEN = 'secret123'
-  before_action :set_kind, only: %i[ show update destroy ]
-  before_action :authenticate
-
+  # TOKEN = 'secret123'
   include ActionController::HttpAuthentication::Token::ControllerMethods
+  before_action :authenticate
+  before_action :set_kind, only: %i[show update destroy]
 
   # GET /kinds
   def index
@@ -62,11 +61,13 @@ class KindsController < ApplicationController
 
   def authenticate
     authenticate_or_request_with_http_token do |token, options|
+      hmac_secret = 'my$ecretK3y'
+      JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
       # Compare tokens in a time constant manner to avoid timing attack
-      ActiveSupport::SecurityUtils.secure_compare(
-        ::Digest::SHA256.hexdigest(token),
-        ::Digest::SHA256.hexdigest(TOKEN)
-      )
+      # ActiveSupport::SecurityUtils.secure_compare(
+      #   ::Digest::SHA256.hexdigest(token),
+      #   ::Digest::SHA256.hexdigest(TOKEN)
+      # )
     end
   end
 end
