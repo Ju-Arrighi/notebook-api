@@ -4,8 +4,12 @@ class ContactsController < ApplicationController
   # GET /contacts
   def index
     @contacts = Contact.all
-
-    render json: @contacts, include: [:phones, :kind, :address]
+    if params[:version] == '1'
+      render json: @contacts, include: [:phones, :kind, :address]
+    elsif params[:version] == '2'
+      render json: @contacts.last(5), include: [:phones, :kind, :address]
+    end
+    # render json: @contacts, include: [:phones, :kind, :address]
     # render json: @contacts, root: true
     # render json: @contacts, only: [:name, :email]
     # render json: @contacts.map { |contact| contact.attributes.merge(author: "Juliana") }
