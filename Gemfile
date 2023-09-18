@@ -52,7 +52,7 @@ gem 'versionist', '~> 1.5.0'
 gem 'kaminari'
 
 # Paginate in your headers, not in your response body.
-gem 'api-pagination'
+# gem 'api-pagination'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
