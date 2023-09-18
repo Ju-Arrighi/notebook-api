@@ -45,6 +45,9 @@ gem 'jwt'
 # Simple, multi-client and secure token-based authentication for Rails.
 gem 'devise_token_auth'
 
+# A plugin for versioning Rails based RESTful APIs.
+gem 'versionist', '~> 1.5.0'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
