@@ -24,7 +24,8 @@ Rails.application.configure do
   }
 
   # Set host option to work in local
-  config.hosts << "notebook.local"
+  config.hosts << "v1.notebook.local"
+  config.hosts << "v2.notebook.local"
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
