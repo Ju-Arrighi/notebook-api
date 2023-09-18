@@ -22,6 +22,10 @@ Rails.application.configure do
     host: 'localhost',
     port: 3000
   }
+
+  # Set host option to work in local
+  config.hosts << "notebook.local"
+
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
