@@ -48,6 +48,12 @@ gem 'devise_token_auth'
 # A plugin for versioning Rails based RESTful APIs.
 gem 'versionist', '~> 1.5.0'
 
+# A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for modern web app frameworks and ORMs
+gem 'kaminari'
+
+# Paginate in your headers, not in your response body.
+gem 'api-pagination'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
